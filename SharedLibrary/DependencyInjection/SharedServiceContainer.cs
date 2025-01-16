@@ -36,7 +36,7 @@ namespace SharedLibrary.DependencyInjection
         {
             app.UseMiddleware<GlobalException>();
 
-            //app.UseMiddleware<ListenToOnlyApiGateway>();
+            app.UseMiddleware<ListenToOnlyApiGateway>();
 
             return app;
         }

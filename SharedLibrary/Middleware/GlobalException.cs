@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using SharedLibrary.Logs;
+using System.Net;
 using System.Text.Json;
 
 namespace SharedLibrary.Middleware
@@ -10,7 +11,7 @@ namespace SharedLibrary.Middleware
         public async Task InvokeAsync(HttpContext context)
         {
             string message = "Internal server error occured. Please try again.";
-            int statusCode = StatusCodes.Status500InternalServerError;
+            int statusCode = (int)HttpStatusCode.InternalServerError;
             string title = "Error";
 
             try
@@ -21,7 +22,7 @@ namespace SharedLibrary.Middleware
                 {
                     title = "Warning";
                     message = "Too many requests made";
-                    statusCode = StatusCodes.Status429TooManyRequests;
+                    statusCode = StatusCodes.Status429TooManyRequests; 
 
                     await ModifyHeader(context, title, message, statusCode);
                 }
